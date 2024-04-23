@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TOA</title>
+</head>
+<body>
+    <form action="/create-toa" method="post" enctype="multipart/form-data">
+        <div class="col-sm">
+            <label for="Team">Team</label><br>
+            <select name="team" id="team" class="form-control">
+                <option value="Red">Red</option>
+                <option value="Blue">Blue</option>
+                <option value="White">White</option>
+            </select>
+        </div><br>
+        <label for="actionName" name="actionName">Team Action: </label>
+        <input type="text" name="actionName" id="actionName"><br>
+        <input type="file" name="iconImg"><br>
+        <input type="submit">
+    </form>
+</body>
+</html>

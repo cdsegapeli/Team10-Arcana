@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <title>Events</title>
+</head>
+<body>
+  <a href="/add-events">Create New Event</a><br>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Date Created</th>
+        <th>Time Created</th>
+        <th>Team</th>
+        <th>Description</th>
+        <th>Vector ID</th>
+        <th>Source Host</th>
+        <th>Target ID</th>
+        <th>Location</th>
+        <th>Analyst</th>
+        <th>Date Last Modified</th>
+        <th>Time Last Modified</th>
+        <th>Edit Event</th>
+        <th>Delete Event</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for event in events %}
+        <tr>
+          <td>{{ event.date_created }}</td>
+          <td>{{ event.time_created }}</td>
+          <td>{{ event.team }}</td>
+          <td>{{ event.description }}</td>
+          <td>{{ event.vector_id }}</td>  <td>{{ event.source_host }}</td>
+          <td>{{ event.target_id }}</td>
+          <td>{{ event.location }}</td>
+          <td>{{ event.analyst }}</td>
+          <td>{{ event.date_last_modified }}</td>
+          <td>{{ event.time_last_modified }}</td>
+          <td>Edit Event</td>  <td>Delete Event</td> </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</body>
+</html>
