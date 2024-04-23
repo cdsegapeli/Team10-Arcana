@@ -1,0 +1,150 @@
+
+<div class="row">
+    <div class="offset-2 col-8 mt-5 d-flex justify-content-center">
+        <div class="p-2">
+        <div style="display: flex;">
+            <h1 style="font-weight: bold; margin-left: 10px; margin-top: 2px;">TOA Library</h1>
+        </div>
+        <dx-data-grid
+            class="p-2"
+            id="gridContainer"
+            [dataSource]="toas"
+            keyExpr="ID"
+            [showBorders]="true"
+            [showRowLines]="true"
+            [width]="500"
+            (onRowInserted)="onAddToa($event)"
+            (onRowUpdated)="onUpdateToa($event)"
+            (onRowRemoved)="onDeleteToa($event)"
+        >
+        <dxo-editing
+            mode="popup"
+            [allowUpdating]="true"
+            [allowAdding]="true"
+            [allowDeleting]="true"
+        >
+        <dxo-popup
+        [showTitle]="true"
+        [width]="700"
+        [height]="500">
+        </dxo-popup>
+        <dxo-form>
+            <dxi-item 
+            itemType="group"
+            caption="Project Information"
+            [colCount]="2"
+            [colSpan]="2">
+                <dxi-item dataField="Team" caption="Team"></dxi-item>
+                <dxi-item dataField="ActionName" caption="Action Name"></dxi-item>
+            </dxi-item>
+            <dxi-item itemType="group" caption="Icon File">
+                <dx-file-uploader
+                #fileUploader
+                selectButtonText="Select icon file"
+                labelText=""
+                [allowedFileExtensions]="['.png', '.jpeg', '.jpg']"
+                [multiple]="false"
+                (onValueChanged)="onValueChanged($event)"
+                uploadMode="instantly"
+                uploadUrl="localhost:4200/assets/images/"
+                dataField="IconFilename"
+                ></dx-file-uploader>
+            </dxi-item>
+        </dxo-form>
+        </dxo-editing>
+            <dxi-column
+                dataField="IconFilename"
+                caption="Icon"
+                [width]="100"
+                [allowFiltering]="false"
+                [allowSorting]="false"
+                cellTemplate="cellTemplate"
+            ></dxi-column>
+            <dxi-column dataField="Team" alignment="center" [width]="100"></dxi-column>
+            <dxi-column dataField="ActionName" caption="Action" alignment="center"></dxi-column>
+
+            <div *dxTemplate="let data of 'cellTemplate'">
+                <img [src]="data.value" />
+            </div>
+            <dxo-toolbar>
+                <dxi-item name="addRowButton"></dxi-item>
+                <dxi-item location="before">
+                  <dx-button
+                  text="View Events"
+                  (onClick)="goToEvents()"></dx-button>
+                </dxi-item>
+                <dxi-item name="searchPanel" location="after"></dxi-item>
+              </dxo-toolbar>
+        </dx-data-grid>
+        </div>
+        <div class="p-2">
+        <div style="display: flex;">
+            <h1 style="font-weight: bold; margin-left: 10px; margin-top: 2px;">Custom Actions</h1>
+        </div>
+        <dx-data-grid
+            class="p-2"
+            id="gridContainer"
+            [dataSource]="custToas"
+            keyExpr="ID"
+            [showBorders]="true"
+            [showRowLines]="true"
+            [title]=""
+            [width]="500"
+            (onRowInserted)="onAddCustToa($event)"
+            (onRowUpdated)="onUpdateCustToa($event)"
+            (onRowRemoved)="onDeleteCustToa($event)"
+        >
+        <dxo-editing
+            mode="popup"
+            [allowUpdating]="true"
+            [allowAdding]="true"
+            [allowDeleting]="true"
+        >
+        <dxo-popup
+        [showTitle]="true"
+        [width]="700"
+        [height]="500">
+        </dxo-popup>
+        <dxo-form>
+            <dxi-item 
+            itemType="group"
+            caption="Project Information"
+            [colCount]="2"
+            [colSpan]="2">
+                <dxi-item dataField="Team" caption="Team"></dxi-item>
+                <dxi-item dataField="ActionName" caption="Action Name"></dxi-item>
+            </dxi-item>
+            <dxi-item itemType="group" caption="Icon File">
+                <dx-file-uploader
+                #fileUploader
+                selectButtonText="Select icon file"
+                labelText=""
+                [allowedFileExtensions]="['.png', '.jpeg', '.jpg']"
+                [multiple]="false"
+                (onValueChanged)="onValueChanged($event)"
+                uploadMode="useButtons"
+                dataField="IconFilename"
+                ></dx-file-uploader>
+            </dxi-item>
+        </dxo-form>
+        </dxo-editing>
+            <dxi-column
+                dataField="IconFilename"
+                caption="Icon"
+                [width]="100"
+                [allowFiltering]="false"
+                [allowSorting]="false"
+                alignment="center"
+                cellTemplate="cellTemplate"
+            ></dxi-column>
+            <dxi-column dataField="Team" alignment="center" [width]="100"></dxi-column>
+            <dxi-column dataField="ActionName" caption="Action" alignment="center"></dxi-column>
+
+            <div *dxTemplate="let data of 'cellTemplate'">
+                <img [src]="data.value" />
+            </div>
+        </dx-data-grid>
+        </div>
+        <br><br>
+    </div>
+</div>

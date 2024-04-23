@@ -1,0 +1,117 @@
+<div class="row">
+    <div class="offset-2 col-8 mt-5">
+        <div style="display: flex;">
+            <h1 style="font-weight: bold; margin-left: 10px; margin-top: 2px;">Events</h1>
+        </div>
+        <div >
+          Create Graph
+        </div>
+        <dx-file-uploader
+          #fileUploader
+          type="default"
+          name="LogsFile"
+          selectButtonText="Upload Logs"
+          labelText=""
+          [allowedFileExtensions]="['.zip']"
+          uploadUrl="http://127.0.0.1:5000/upload-additional-logs"
+          uploadMode="instantly"
+        ></dx-file-uploader>
+        <a [href]="fileUrl" download="Project.json"></a>
+        <dx-data-grid
+          #grid
+          id="gridContainer"
+          [dataSource]="events"
+          keyExpr="ID"
+          [allowColumnReordering]="true"
+          [hoverStateEnabled]="true"
+          [showBorders]="true"
+          [selectedRowKeys]="[]"
+          (onEditingStart)="logEvent('EditingStart')"
+          (onInitNewRow)="logEvent('InitNewRow')"
+          (onRowInserting)="onRowInserting($event)"
+          (onRowInserted)="onAddEvent($event)"
+          (onRowUpdating)="logEvent('RowUpdating')"
+          (onRowUpdated)="onUpdateEvent($event)"
+          (onRowRemoving)="logEvent('RowRemoving')"
+          (onRowRemoved)="onEventDelete($event)"
+          (onSaving)="logEvent('Saving')"
+          (onSaved)="logEvent('Saved')"
+          (onEditCanceling)="logEvent('EditCanceling')"
+          (onEditCanceled)="logEvent('EditCanceled')"
+        >
+        <dxo-search-panel
+        [visible]="true"
+        [width]="240"
+        placeholder="Search..."
+        ></dxo-search-panel>
+        <dxo-paging [enabled]="true"></dxo-paging>
+        <dxo-editing
+        mode="popup"
+        [allowUpdating]="true"
+        [allowAdding]="true"
+        [allowDeleting]="true"
+        >
+        <dxo-popup
+        [showTitle]="true"
+        [width]="700"
+        [height]="500"
+      ></dxo-popup>
+        <dxo-form>
+          <dxi-item itemType="group"
+          [colCount]="2"
+          [colSpan]="2">
+              <dxi-item caption="Initials" dataField="Analyst" isRequired="true"></dxi-item>
+              <dxi-item caption="VectorID" dataField="VectorID" isRequired="true"></dxi-item>
+              <dxi-item caption="Date" dataField="Date" isRequired="true"></dxi-item>
+              <dxi-item caption="Time" dataField="Time" isRequired="true"></dxi-item>
+              <dxi-item caption="Team" dataField="Team" isRequired="true"></dxi-item>
+              <dxi-item caption="SourceIP" dataField="SourceIP" isRequired="true"></dxi-item>
+              <dxi-item caption="Location" dataField="Location" isRequired="true"></dxi-item>
+              <dxi-item caption="TargetIP" dataField="TargetIP" isRequired="true"></dxi-item>
+              <dxi-item caption="Posture" dataField="Posture"></dxi-item>
+          </dxi-item>
+          <dxi-item itemType="group"
+          [colSpan]="2">
+            <dxi-item caption="Description" dataField="Description" isRequired="true" editorType="dxTextArea"></dxi-item>
+          </dxi-item>
+      </dxo-form>
+        </dxo-editing>
+          <dxo-selection mode="single"></dxo-selection>
+          <dxi-column dataField="Analyst" caption="Initials" ></dxi-column>
+          <dxi-column dataField="Date" caption="Date" ></dxi-column>
+          <dxi-column dataField="Time" caption="Time" ></dxi-column>
+          <dxi-column dataField="Description" caption="Description" [width]="300" ></dxi-column>
+          <dxi-column dataField="Location" caption="Location" ></dxi-column>
+          <dxi-column dataField="Team" caption="Team" ></dxi-column>
+          <dxi-column dataField="Posture" caption="Posture" ></dxi-column>
+          <dxi-column dataField="VectorID" caption="Vector ID" ></dxi-column>
+          <dxi-column dataField="SourceIP" caption="Source IP" ></dxi-column>
+          <dxi-column dataField="TargetIP" caption="Target IP" ></dxi-column>
+          <dxo-toolbar>
+            <dxi-item name="addRowButton"></dxi-item>
+            <dxi-item location="before">
+              <dx-button
+              text="View Deleted Events"
+              (onClick)="goToDeletedEvents()"></dx-button>
+            </dxi-item>
+            <dxi-item location="before">
+              <dx-button
+              text="View TOAs"
+              (onClick)="goToTOA()"></dx-button>
+            </dxi-item>
+            <dxi-item location="before">
+              <dx-button
+              text="Generate Graph"
+              routerLink="/event/graph"></dx-button>
+            </dxi-item>
+            <dxi-item location="before">
+              <a [href]="fileUrl" download="Project.json" class="btn btn-light">Export Project</a>
+              <!-- <dx-button
+              text="Export Project"
+              (onClick)="exportProject()"></dx-button> -->
+            </dxi-item>
+            <dxi-item name="searchPanel" location="after"></dxi-item>
+          </dxo-toolbar>
+        </dx-data-grid>
+    </div>
+</div>

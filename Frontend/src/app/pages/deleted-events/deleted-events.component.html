@@ -1,0 +1,59 @@
+<div class="row">
+    <div class="offset-2 col-8 mt-5">
+        <div style="display: flex;">
+
+            <h1 style="font-weight: bold; margin-left: 10px; margin-top: 2px;">Previously Deleted Events</h1>
+        </div>
+        <dx-data-grid
+          #grid
+          id="gridContainer"
+          [dataSource]="deletedEvents"
+          keyExpr="ID"
+          [allowColumnReordering]="true"
+          [hoverStateEnabled]="true"
+          [showBorders]="true"
+          [selectedRowKeys]="[]"
+          (onRowRemoving)="logEvent('RowRemoving')"
+          (onRowRemoved)="onRecoverEvent($event)"
+          (onSaving)="logEvent('Saving')"
+          (onSaved)="logEvent('Saved')"
+        >
+        <dxo-search-panel
+        [visible]="true"
+        [width]="240"
+        placeholder="Search..."
+        ></dxo-search-panel>
+        <dxo-paging [enabled]="true"></dxo-paging>
+        <dxo-editing
+            mode="form"
+            [allowUpdating]="false"
+            [allowAdding]="false"
+            [allowDeleting]="true"
+        >
+        <dxo-texts 
+        deleteRow="Recover"
+        confirmDeleteMessage="Recover this event?"></dxo-texts>
+        </dxo-editing>
+          <dxo-selection mode="single"></dxo-selection>
+          <dxi-column dataField="Analyst" caption="Initials" ></dxi-column>
+          <dxi-column dataField="Date" caption="Date" ></dxi-column>
+          <dxi-column dataField="Time" caption="Time" ></dxi-column>
+          <dxi-column dataField="Description" caption="Description" [width]="300" ></dxi-column>
+          <dxi-column dataField="Location" caption="Location" ></dxi-column>
+          <dxi-column dataField="Team" caption="Team" ></dxi-column>
+          <dxi-column dataField="Posture" caption="Posture" ></dxi-column>
+          <dxi-column dataField="VectorID" caption="Vector ID" ></dxi-column>
+          <dxi-column dataField="SourceIP" caption="Source IP" ></dxi-column>
+          <dxi-column dataField="TargetIP" caption="Target IP" ></dxi-column>
+          <dxo-toolbar>
+            <dxi-item location="before">
+              <dx-button
+              text="View Events"
+              (onClick)="goToEvents()"></dx-button>
+            </dxi-item>
+            <dxi-item name="searchPanel" location="after"></dxi-item>
+          </dxo-toolbar>
+        </dx-data-grid>
+
+    </div>
+</div>

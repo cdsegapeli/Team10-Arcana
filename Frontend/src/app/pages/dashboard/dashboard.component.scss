@@ -1,0 +1,71 @@
+
+/* Main container styles */
+.menu-container {
+    max-width: 600px; /* Adjust as necessary for your layout */
+    margin: 2rem auto;
+    background-color: EAEAEA; /* White background */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    border-radius: 8px;
+    padding: 2rem;
+  }
+  
+  /* Header styles */
+  .menu-container h1 {
+    color: black; /* Dark blue color, adjust as needed */
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem; /* Example size, adjust as needed */
+    text-align: center;
+  }
+  
+  /* List styles */
+  .menu-list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* List item styles */
+  .menu-list li {
+    display: flex;
+    align-items: center;
+    background-color: #f4f4f4; /* Light grey background */
+    margin-bottom: 1rem; /* Spacing between items */
+    padding: 0.75rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  
+    &:last-child {
+      margin-bottom: 0; /* Remove margin for the last item */
+    }
+  
+    &:hover {
+      background-color: #e9e9e9; /* Slightly darker on hover */
+    }
+  }
+  
+  /* Icon styles */
+  .menu-list i {
+    font-size: 1.2rem; /* Icon size */
+    color: #007bff; /* Icon color, blue */
+    width: 30px; /* Fixed width for alignment */
+  }
+  
+  /* Text styles */
+  .menu-list li span {
+    margin-left: 0.5rem; /* Space between icon and text */
+    color: #333; /* Text color */
+    font-size: 1rem; /* Text size */
+  }
+  
+  /* You can add media queries for responsiveness */
+  @media (max-width: 768px) {
+    .menu-container {
+      padding: 1rem;
+    }
+  
+    .menu-container h1 {
+      font-size: 1.2rem;
+    }
+  }
+  

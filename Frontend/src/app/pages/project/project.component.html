@@ -1,0 +1,103 @@
+
+<div class="row">
+    <div class="offset-2 col-8 mt-5">
+        <div style="display: flex;">
+            <i class="bi bi-folder" style="font-size: 35px;"></i>
+            <h1 style="font-weight: bold; margin-left: 10px; margin-top: 2px;">Manage Projects</h1>
+        </div>
+        <dx-file-uploader
+          #fileUploader
+          name="ProjectFile"
+          selectButtonText="Upload Project"
+          labelText=""
+          [allowedFileExtensions]="['.json']"
+          uploadUrl="http://127.0.0.1:5000/upload-project"
+          uploadMode="instantly"
+        ></dx-file-uploader>
+        <dx-data-grid
+          #grid
+          id="gridContainer"
+          [dataSource]="projects"
+          keyExpr="ID"
+          [allowColumnReordering]="true"
+          [hoverStateEnabled]="true"
+          [showBorders]="true"
+          [selectedRowKeys]="[]"
+          (onRowClick)="onOpenProject($event)"
+          (onEditingStart)="logEvent('EditingStart')"
+          (onInitNewRow)="logEvent('InitNewRow')"
+          (onRowInserting)="onRowInserting($event)"
+          (onRowInserted)="onAddProject($event)"
+          (onRowUpdating)="logEvent('RowUpdating')"
+          (onRowUpdated)="onUpdateProject($event)"
+          (onRowRemoving)="logEvent('RowRemoving')"
+          (onRowRemoved)="onProjectDelete($event)"
+          (onSaving)="logEvent('Saving')"
+          (onSaved)="logEvent('Saved')"
+          (onEditCanceling)="logEvent('EditCanceling')"
+          (onEditCanceled)="logEvent('EditCanceled')"
+        >
+        <dxo-search-panel
+        [visible]="true"
+        [width]="240"
+        placeholder="Search..."
+        ></dxo-search-panel>
+        <dxo-paging [enabled]="true"></dxo-paging>
+        <dxo-editing
+        mode="popup"
+        [allowUpdating]="true"
+        [allowAdding]="true"
+        [allowDeleting]="true"
+      >
+      <dxo-popup
+        [showTitle]="true"
+        [width]="700"
+        [height]="500"
+      ></dxo-popup>
+      <dxo-form>
+        <dxi-item 
+          itemType="group"
+          caption="Project Information"
+          [colCount]="2"
+          [colSpan]="2">
+          <dxi-item dataField="Name" caption="Project Name"></dxi-item>
+          <dxi-item dataField="Analyst" caption="Initials"></dxi-item>
+          <!-- <dxi-item dataField="StartDate" caption="Date"></dxi-item>
+          <dxi-item dataField="StartTime" caption="Time"></dxi-item> -->
+        </dxi-item>
+        <dxi-item itemType="group" caption="Log Zip File">
+          <dx-file-uploader
+            #fileUploader
+            name="LogsFile"
+            selectButtonText="Select zip file"
+            labelText=""
+            [allowedFileExtensions]="['.zip']"
+            uploadUrl="http://127.0.0.1:5000/upload-file"
+            (onValueChanged)="onValueChanged($event)"
+            uploadMode="instantly"
+          ></dx-file-uploader>
+        </dxi-item>
+      </dxo-form>
+      </dxo-editing>
+          <dxo-selection mode="single"></dxo-selection>
+          <!-- <dxi-column
+                dataField="ID"
+                caption="Project Name"
+                cellTemplate="cellTemplate"
+            ></dxi-column> -->
+          <dxi-column dataField="Name" caption="Project Name" ></dxi-column>
+          <dxi-column dataField="Analyst" caption="Analyst" ></dxi-column>
+          <!-- <dxi-column dataField="Location" caption="Location" [visible]="false"></dxi-column> -->
+          <dxi-column dataField="StartDate" caption="Start Date" dataType="date"></dxi-column>
+          <dxi-column dataField="EndDate" caption="Date Last Modified" dataType="date"></dxi-column>
+          <!-- <dxi-column dataField="Initials" caption="Initials" [visible]="false"></dxi-column> -->
+
+          <!-- <div *dxTemplate="let data of 'cellTemplate'">
+            <a [href]="data.value" >Project</a>
+        </div> -->
+        </dx-data-grid>
+
+    </div>
+</div>
+
+

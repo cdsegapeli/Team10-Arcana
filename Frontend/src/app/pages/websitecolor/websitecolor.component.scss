@@ -1,0 +1,51 @@
+  .custom-container{
+    width: 100%; 
+    justify-content: center; 
+    display: flex;
+  }
+
+  .additional-text {
+    font-size: 24px;
+    text-align: left; /* Ensure the text is left-aligned */
+  }
+
+  .color-box-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  }
+
+  .color-box {
+    top: -50px;
+    width: 200px;
+    height: 200px;
+    box-sizing: border-box;
+  }
+
+  #colorBox1 {
+    background: linear-gradient(to bottom, darkblue, darkblue 33.33%, blue 33.33%, blue 66.66%, lightgray 66.66%);
+  }
+
+  #colorBox2 {
+    background: linear-gradient(to bottom, black, black 33.33%, gray 33.33%, gray 66.66%, lightgray 66.66%);
+  }
+
+  #colorBox3 {
+    background: linear-gradient(to bottom, #ff0000, #ff0000 33.33%, #ff6a6a 33.33%, #ff6a6a 66.66%, lightgray 66.66%);
+  }
+
+  #colorBox4 {
+    background: linear-gradient(to bottom, #00ff00, #00ff00 33.33%, #7fff7f 33.33%,  #7fff7f 66.66%, lightgray 66.66%);
+  }
+  .color-scheme-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 20px;
+  }
+
+  .color-scheme-container > label,
+  .color-scheme-container > select,
+  .color-scheme-container > button {
+      margin-bottom: 10px; /* Adjust the margin between the label, select, and button */
+  }

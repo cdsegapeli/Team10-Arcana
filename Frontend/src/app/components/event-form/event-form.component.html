@@ -1,0 +1,18 @@
+<dxo-form id="eventForm" title="Event Information">
+    <dxi-item itemType="group"
+    [colCount]="2">
+        <dxi-item caption="Initials" isRequired="true"></dxi-item>
+        <dxi-item caption="VectorID" isRequired="true"></dxi-item>
+        <dxi-item caption="Date" isRequired="true"></dxi-item>
+        <dxi-item caption="Time" isRequired="true"></dxi-item>
+        <dxi-item caption="Team" isRequired="true"></dxi-item>
+        <dxi-item caption="Posture" isRequired="false"></dxi-item>
+        <dxi-item caption="SourceIP" isRequired="true"></dxi-item>
+        <dxi-item caption="TargetIP" isRequired="true"></dxi-item>
+        <dxi-item caption="Location" isRequired="true"></dxi-item>
+    </dxi-item>
+    <dxi-item caption="Description">
+        <dx-text-area
+        [height]="50"></dx-text-area>
+    </dxi-item>
+</dxo-form>

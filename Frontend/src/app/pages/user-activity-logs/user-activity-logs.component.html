@@ -1,0 +1,28 @@
+
+<div class="row">
+  <div class="offset-2 col-8 mt-5">
+    <div style="display: flex;">
+      <h1 style="font-weight: bold; margin-left: 10px; margin-top: 2px;">User Activity Logs</h1>
+    </div>
+        <dx-data-grid
+          #grid
+          id="gridContainer"
+          keyExpr="ID"
+          [dataSource]="logs"
+          [allowColumnReordering]="true"
+          [hoverStateEnabled]="true"
+          [showBorders]="true"
+          [selectedRowKeys]="[]"
+        >
+        <dxo-search-panel
+        [visible]="true"
+        [width]="240"
+        placeholder="Search..."
+        ></dxo-search-panel>
+        <dxo-paging [enabled]="true"></dxo-paging>
+          <dxo-selection mode="single"></dxo-selection>
+          <dxi-column dataField="Timestamp" caption="Timestamp" [width]="135"></dxi-column>
+          <dxi-column dataField="Log" caption="Log" ></dxi-column>
+        </dx-data-grid>
+  </div>
+</div>

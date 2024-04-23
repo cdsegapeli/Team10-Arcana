@@ -1,0 +1,42 @@
+
+<div class="custom-container">
+  <div style="border: 1x; border-color: lightgray; border-style: solid; padding: 20px; margin: 20px; margin-top: 8vh; width: 80%; border-radius: 5px; bord">
+    <div class="row">
+      <div class="col">
+
+        <a>Change Color Website</a>
+      
+        <div class="additional-text">
+          Select Color Scheme <br>
+          If you would like to apply the color scheme permanently, please click save.
+        </div>
+      
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="color"> 
+        <div class="color-box-container">
+          <div class="color-box" id="colorBox1"> </div>
+          <div class="color-box" id="colorBox2"> </div>
+          <div class="color-box" id="colorBox3"> </div>
+          <div class="color-box" id="colorBox4"> </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="color-scheme-container">
+        <label for="colorScheme">Choose Color Scheme:</label>
+        <select [(ngModel)]="selectedColorScheme">
+          <option value="default">Blue</option>
+          <option value="colorScheme1">Red</option>
+          <option value="colorScheme2">Green</option>
+          <option value="colorScheme3">Black</option>
+        </select>
+
+        
+        <button (click)="saveColorScheme(selectedColorScheme)">Save</button>
+    </div>
+  </div>
+</div>
