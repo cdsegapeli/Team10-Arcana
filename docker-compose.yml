@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+
+  angular-service: 
+    container_name: team10_arcana-frontend
+    build: ./Frontend
+    volumes:
+      - '~/arcana-frontend:/app'
+    ports:
+      - '4200:4200'
+
+  flask-service:
+    container_name: team10_arcana-backend
+    build: ./Backend
+    volumes:
+      - '~/arcana-backend:/app'
+    ports:
+      - '5000:5000'
+
+  mongodb:
+    container_name: team10_arcana-mongodb
+    image: mongodb/mongodb-community-server:latest

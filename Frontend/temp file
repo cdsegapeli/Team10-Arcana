@@ -1,0 +1,121 @@
+<dx-diagram #diagram id="diagram">
+  <dxo-nodes
+    [dataSource]="dataSource"
+    keyExpr="nodeID"
+    textExpr="team"
+    typeExpr="Blue"
+    parentKeyExpr="parentID"
+  >
+    <dxo-auto-layout type="tree"></dxo-auto-layout>
+  </dxo-nodes>  
+    <dxi-custom-shape
+      category="icon"
+      type="restore"
+      title="restore"
+      backgroundImageUrl="../assets/icons/restore.svg"
+      [backgroundImageLeft]="0.15"
+      [backgroundImageTop]="0"
+      [backgroundImageWidth]="0.7"
+      [backgroundImageHeight]="0.7"
+      [defaultWidth]="0.75"
+      [defaultHeight]="0.75"
+      defaultText="Restore"
+      [allowEditText]="true"
+      [textLeft]="0"
+      [textTop]="0.7"
+      [textWidth]="1"
+      [textHeight]="0.3"
+    >
+    <dxi-connection-point [x]="0.5" [y]="0"></dxi-connection-point>
+    <dxi-connection-point [x]="0.9" [y]="0.5"></dxi-connection-point>
+    <dxi-connection-point [x]="0.5" [y]="1"></dxi-connection-point>
+    <dxi-connection-point [x]="0.1" [y]="0.5"></dxi-connection-point>
+    </dxi-custom-shape>
+    <dxi-custom-shape
+      category="icon"
+      type="RedTeam"
+      title="RedTeam"
+      backgroundImageUrl="../assets/icons/RedTeam_Activity.svg"
+      [backgroundImageLeft]="0.15"
+      [backgroundImageTop]="0"
+      [backgroundImageWidth]="0.7"
+      [backgroundImageHeight]="0.7"
+      [defaultWidth]="0.75"
+      [defaultHeight]="0.75"
+      defaultText="RedTeam"
+      [allowEditText]="true"
+      [textLeft]="0"
+      [textTop]="0.7"
+      [textWidth]="1"
+      [textHeight]="0.3"
+      >"
+  
+    </dxi-custom-shape>
+    <dxi-custom-shape
+      category="icon"
+      type="Protect"
+      title="Protect"
+      backgroundImageUrl="../assets/icons/protect.svg"
+      [backgroundImageLeft]="0.15"
+      [backgroundImageTop]="0"
+      [backgroundImageWidth]="0.7"
+      [backgroundImageHeight]="0.7"
+      [defaultWidth]="0.75"
+      [defaultHeight]="0.75"
+      defaultText="Protect"
+      [allowEditText]="true"
+      [textLeft]="0"
+      [textTop]="0.7"
+      [textWidth]="1"
+      [textHeight]="0.3"
+    >
+  
+    </dxi-custom-shape>
+    <dxi-custom-shape
+      category="icon"
+      type="Detect"
+      title="Detect"
+      backgroundImageUrl="../assets/icons/detect.svg"
+      [backgroundImageLeft]="0.15"
+      [backgroundImageTop]="0"
+      [backgroundImageWidth]="0.7"
+      [backgroundImageHeight]="0.7"
+      [defaultWidth]="0.75"
+      [defaultHeight]="0.75"
+      defaultText="Detect"
+      [allowEditText]="true"
+      [textLeft]="0"
+      [textTop]="0.7"
+      [textWidth]="1"
+      [textHeight]="0.3"
+    >
+    
+    </dxi-custom-shape>
+    <dxi-custom-shape
+      category="icon"
+      type="Blue"
+      title="Blue"
+      backgroundImageUrl="../assets/icons/BlueTeam_Activity.svg"
+      [backgroundImageLeft]="0.15"
+      [backgroundImageTop]="0"
+      [backgroundImageWidth]="0.7"
+      [backgroundImageHeight]="0.7"
+      [defaultWidth]="0.75"
+      [defaultHeight]="0.75"
+      defaultText="BlueTeam"
+      [allowEditText]="true"
+      [textLeft]="0"
+      [textTop]="0.7"
+      [textWidth]="1"
+      [textHeight]="0.3"
+    >
+    <dxi-connection-point [x]="0.5" [y]="0"></dxi-connection-point>
+    <dxi-connection-point [x]="0.9" [y]="0.5"></dxi-connection-point>
+    <dxi-connection-point [x]="0.5" [y]="1"></dxi-connection-point>
+    <dxi-connection-point [x]="0.1" [y]="0.5"></dxi-connection-point>
+    </dxi-custom-shape>
+    <dxo-toolbox >
+      <dxi-group category="icon" title="Icons" ></dxi-group>
+    </dxo-toolbox>
+  </dx-diagram>
+  <button (click) = "saveEvents()">hello</button>
