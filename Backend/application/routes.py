@@ -1,5 +1,5 @@
 from application import app, mongo
-from flask import jsonify, render_template, request, url_for, redirect, flash, session
+from flask import jsonify, request
 from bson.objectid import ObjectId
 from bson.json_util import dumps
 from flask_cors import cross_origin
@@ -80,17 +80,23 @@ def getLogsFile():
 @app.route("/update-project", methods=['POST'])
 @cross_origin()
 def updateProject():
+    today = datetime.datetime.now()
+    newDate = datetime.datetime.strftime(today, "%m/%d/%Y")
+    newTime = datetime.datetime.strftime(today, "%H:%M")
     if request.method == 'POST':
         id = request.json['ID']['$oid']
         try:
             project = {'name':request.json['Name'],
-                        'analyst': request.json['Analyst']}
+                        'analyst': request.json['Analyst'],
+                        'endDate': newDate,
+                        'endTime': newTime 
+                        }
             db.updateProject(id, project)
             return 'Project updated'
         except:
             print('Unable to update project.')
     
-    return redirect(url_for('index'))
+    return 'Project Updated'
 
 # Delete a project from the database
 @app.route("/delete-project", methods=['POST'])
@@ -125,7 +131,7 @@ def createEvent():
         newTime = datetime.datetime.strftime(today, "%H:%M")
         try:
             posture = ''
-            if request.json['Posture']:
+            if 'Posture' in request.json.keys():
                 posture = request.json['Posture']
             event = {'date':request.json['Date'],
                     'time':request.json['Time'],
@@ -268,13 +274,6 @@ def deleteCustToa():
         db.deleteCustToa(request.json['ID']['$oid'])
     return 'Deleted Custom TOA'
 
-@app.route('/sort-events')
-@cross_origin()
-def getSortedEvents():
-    events = sortEvents(projectManager.currentProject)
-    print(events)
-    return json.loads(dumps(events))
-
 @app.route('/view-deleted-events')
 @cross_origin()
 def viewDeletedEvents():
@@ -366,3 +365,17 @@ def exportProject():
         project = projectManager.exportProject(projectManager.currentProject)
         return json.loads(dumps(project))
     return 'Export failed'
+
+@app.route('/get-sorted-events', methods=['GET'])
+@cross_origin()
+def getSortedEvents():
+    events = sortEvents(projectManager.currentProject)
+    return json.loads(dumps(events))
+
+@app.route('/save-graph', methods=['POST'])
+@cross_origin()
+def saveGraph():
+    if request.method == 'POST':
+        print(request.json['page'])
+    return 'Save Graph'
+        # db.saveGraph(projectManager.currentProject)

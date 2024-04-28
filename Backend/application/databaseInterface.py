@@ -15,6 +15,7 @@ class DatabaseInterface:
         self.baseToaDB = mongo.db.BaseTeamActions
         self.custToaDB = mongo.db.CustomTeamActions
         self.userActivityLogDB = mongo.db.UserActivityLogs
+        self.graphDB = mongo.db.EventGraph
 
     def logActivity(self, str):
         today = datetime.datetime.now()
@@ -62,8 +63,8 @@ class DatabaseInterface:
             self.projectsDB.update_one(
                 {'_id': ObjectId(projectID)},
                 {'$set':
-                    {'lastModifiedDate': newDate,
-                     'lastModifiedTime': newTime}
+                    {'endDate': newDate,
+                     'endTime': newTime}
             })
         except:
             print(f"Unable to update project with id {id}")
@@ -83,8 +84,8 @@ class DatabaseInterface:
         event['projectID'] = ObjectId(projectID)
         event['dataSource'] = ''
         try:
-            self.checkIfMalformed(event)
-            self.checkTOA(event)
+            event = self.checkIfMalformed(event)
+            event = self.checkTOA(event)
             self.eventsDB.insert_one(event)
             self.originEventsDB.insert_one(event)
             self.logActivity(f"Project ID - {projectID}: EVENT CREATED: {event}")
@@ -138,8 +139,10 @@ class DatabaseInterface:
         importedIDs = []
         for event in events:
             event['projectID'] = ObjectId(projectID)
-            print(event['projectID'])
+            event = self.checkIfMalformed(event)
+            event = self.checkTOA(event)
             try:
+                # Here check if isMalformed and TOA is set
                 self.eventsDB.insert_one(event)
                 self.originEventsDB.insert_one(event)
                 self.logActivity(f"Project ID - {projectID}: EVENTS IMPORTED: {events}")
@@ -205,12 +208,14 @@ class DatabaseInterface:
     def createCustToa(self, toa):
         try:
             self.custToaDB.insert_one(toa)
+            self.logActivity(f"Project ID - {toa['projectID']}: TOA CREATED: {toa}")
         except:
             print('Unable add TOA to database.')
     
     def createBaseToa(self, toa):
         try:
             self.baseToaDB.insert_one(toa)
+            self.logActivity(f"TOA CREATED: {toa}")
         except:
             print('Unable add TOA to database.')
 
@@ -238,12 +243,14 @@ class DatabaseInterface:
                         'actionName': toa['actionName'],
                         'iconFilename': toa['iconFilename']}
                 })
+            self.logActivity(f"TOA UPDATED: {toa}")
         except:
             print("Unable to update TOA")
 
     def deleteToa(self, id):
         try:
             self.baseToaDB.delete_one({'_id': ObjectId(id)})
+            self.logActivity(f"TOA DELETED: {id}")
         except:
             print("Unable to delete TOA from database")
 
@@ -278,32 +285,20 @@ class DatabaseInterface:
                         'actionName': toa['actionName'],
                         'iconFilename': toa['iconFilename']}
                 })
+            self.logActivity(f"Project ID - {id}: TOA UPDATED: {toa}")
         except Exception as e:
             print(f"Unable to update TOA: {e}")
 
     def deleteCustToa(self, id):
         try:
             self.custToaDB.delete_one({'_id': ObjectId(id)})
+            self.logActivity(f"TOA DELETED: {id}")
         except:
             print("Unable to delete TOA from database")
     
     # functions for UserActivityLogs
     def getUserActivityLogs(self):
         return self.userActivityLogDB.find()     
-    
-    def addUserActivityLog(self, log):
-        try:
-            self.userActivityLogDB.insert_one(log)
-        except:
-            print("Unable to save log to the database.")
-        return
-    
-    def clearUserActivityLogs(self):
-        try:
-            self.userActivityLogDB.delete_many({})
-        except:
-            print("Unable to clear user activity logs.")
-        return
     
     def checkIfMalformed(self, event):
         malformed = False
@@ -322,3 +317,17 @@ class DatabaseInterface:
             event['TOA'] = 'Red Team Activity'
         return event
 
+    def getGraph(self, projectID):
+        try:
+            return self.graphDB.find({'projectID': ObjectId(projectID)})
+        except Exception as e:
+            print(f'Unable to find graph for project {projectID}: {e}')
+            return False
+
+    def saveGraph(self, projectID, graph):
+        graph['projectID'] = ObjectId(projectID)
+        try:
+            self.graphDB.delete_one(ObjectId(projectID))
+            self.graphDB.insert_one(graph)
+        except Exception as e:
+            print(f'Unable to update graph: {e}')

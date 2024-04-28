@@ -45,8 +45,7 @@
                 [allowedFileExtensions]="['.png', '.jpeg', '.jpg']"
                 [multiple]="false"
                 (onValueChanged)="onValueChanged($event)"
-                uploadMode="instantly"
-                uploadUrl="localhost:4200/assets/images/"
+                uploadMode="useForm"
                 dataField="IconFilename"
                 ></dx-file-uploader>
             </dxi-item>
@@ -122,7 +121,7 @@
                 [allowedFileExtensions]="['.png', '.jpeg', '.jpg']"
                 [multiple]="false"
                 (onValueChanged)="onValueChanged($event)"
-                uploadMode="useButtons"
+                uploadMode="useForm"
                 dataField="IconFilename"
                 ></dx-file-uploader>
             </dxi-item>

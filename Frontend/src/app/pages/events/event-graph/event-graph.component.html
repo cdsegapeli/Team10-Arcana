@@ -1,15 +1,17 @@
 <dx-diagram #diagram id="diagram">
-  <dxo-nodes
+  <dxo-nodes 
     [dataSource]="dataSource"
     keyExpr="nodeID"
-    textExpr="Title"
+    textExpr="displayInfo"
+    title="team"
+    [typeExpr]="itemTypeExpr"
     parentKeyExpr="parentID"
   >
     <dxo-auto-layout type="tree"></dxo-auto-layout>
-  </dxo-nodes>  
+  </dxo-nodes> 
     <dxi-custom-shape
       category="icon"
-      type="restore"
+      type="team"
       title="restore"
       backgroundImageUrl="../assets/icons/restore.svg"
       [backgroundImageLeft]="0.15"
@@ -18,7 +20,7 @@
       [backgroundImageHeight]="0.7"
       [defaultWidth]="0.75"
       [defaultHeight]="0.75"
-      defaultText="Router"
+      defaultText="Restore"
       [allowEditText]="true"
       [textLeft]="0"
       [textTop]="0.7"
@@ -92,8 +94,8 @@
     </dxi-custom-shape>
     <dxi-custom-shape
       category="icon"
-      type="BlueTeam"
-      title="BlueTeam"
+      type="Blue"
+      title="Blue"
       backgroundImageUrl="../assets/icons/BlueTeam_Activity.svg"
       [backgroundImageLeft]="0.15"
       [backgroundImageTop]="0"
@@ -113,8 +115,7 @@
     <dxi-connection-point [x]="0.5" [y]="1"></dxi-connection-point>
     <dxi-connection-point [x]="0.1" [y]="0.5"></dxi-connection-point>
     </dxi-custom-shape>
-    <dxo-toolbox >
+    <dxo-toolbox visibility="disabled">
       <dxi-group category="icon" title="Icons" ></dxi-group>
     </dxo-toolbox>
   </dx-diagram>
-  <button (click) = "saveEvents()">hello</button>

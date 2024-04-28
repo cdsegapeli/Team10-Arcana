@@ -35,4 +35,8 @@ export class EventsService {
   getSortedEvents(): Observable<any> {
     return this.http.get(environment.apiUrl+"/get-sorted-events");
   }
+
+  saveGraph(graph: any){
+    this.http.post(environment.apiUrl+"/save-graph", graph).subscribe()
+  }
 }

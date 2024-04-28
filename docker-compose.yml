@@ -5,18 +5,18 @@ services:
   angular-service: 
     container_name: team10_arcana-frontend
     build: ./Frontend
-    volumes:
-      - '~/arcana-frontend:/app'
+    # volumes:
+    #   - '~/arcana-frontend:/app'
     ports:
       - '4200:4200'
 
   flask-service:
     container_name: team10_arcana-backend
     build: ./Backend
-    volumes:
-      - '~/arcana-backend:/app'
+    # volumes:
+    #   - '~/arcana-backend:/app'
     ports:
-      - '5000:5000'
+      - '7200:7200'
 
   mongodb:
     container_name: team10_arcana-mongodb

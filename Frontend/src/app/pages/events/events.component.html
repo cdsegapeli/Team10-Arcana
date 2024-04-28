@@ -3,9 +3,6 @@
         <div style="display: flex;">
             <h1 style="font-weight: bold; margin-left: 10px; margin-top: 2px;">Events</h1>
         </div>
-        <div >
-          Create Graph
-        </div>
         <dx-file-uploader
           #fileUploader
           type="default"
@@ -13,7 +10,7 @@
           selectButtonText="Upload Logs"
           labelText=""
           [allowedFileExtensions]="['.zip']"
-          uploadUrl="http://127.0.0.1:5000/upload-additional-logs"
+          uploadUrl="http://127.0.0.1:7200/upload-additional-logs"
           uploadMode="instantly"
         ></dx-file-uploader>
         <a [href]="fileUrl" download="Project.json"></a>

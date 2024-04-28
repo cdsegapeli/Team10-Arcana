@@ -52,6 +52,8 @@ class ProjectManager:
         project = db.getProjectInfo(projectID)
         del project['_id']
         events = list(db.getEvents(projectID))
+        for event in events:
+            del event['_id']
         project['events'] = events
         return project
 

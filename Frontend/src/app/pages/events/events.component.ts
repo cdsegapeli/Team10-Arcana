@@ -52,6 +52,9 @@ export class EventsComponent {
   onAddEvent(newEvent: any){
     console.log(newEvent.data)
     this.eventService.addEvent(newEvent.data)
+    setTimeout(()=>{
+      window.location.reload()
+    }, 100)
   }
 
   onUpdateEvent(newEvent: any){

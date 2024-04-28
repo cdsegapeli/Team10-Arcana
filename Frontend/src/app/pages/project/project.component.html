@@ -11,7 +11,7 @@
           selectButtonText="Upload Project"
           labelText=""
           [allowedFileExtensions]="['.json']"
-          uploadUrl="http://127.0.0.1:5000/upload-project"
+          uploadUrl="http://127.0.0.1:7200/upload-project"
           uploadMode="instantly"
         ></dx-file-uploader>
         <dx-data-grid
@@ -72,7 +72,7 @@
             selectButtonText="Select zip file"
             labelText=""
             [allowedFileExtensions]="['.zip']"
-            uploadUrl="http://127.0.0.1:5000/upload-file"
+            uploadUrl="http://127.0.0.1:7200/upload-file"
             (onValueChanged)="onValueChanged($event)"
             uploadMode="instantly"
           ></dx-file-uploader>
